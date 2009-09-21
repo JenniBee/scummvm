@@ -1,0 +1,42 @@
+Index: base/plugins.cpp
+===================================================================
+--- base/plugins.cpp	(revision 44039)
++++ base/plugins.cpp	(working copy)
+@@ -106,6 +106,9 @@
+ 		#if PLUGIN_ENABLED_STATIC(DRASCULA)
+ 		LINK_PLUGIN(DRASCULA)
+ 		#endif
++		#if PLUGIN_ENABLED_STATIC(GARGOYLE)
++		LINK_PLUGIN(GARGOYLE)
++		#endif
+ 		#if PLUGIN_ENABLED_STATIC(GOB)
+ 		LINK_PLUGIN(GOB)
+ 		#endif
+Index: configure
+===================================================================
+--- configure	(revision 44039)
++++ configure	(working copy)
+@@ -84,6 +84,7 @@
+ add_engine cine "Cinematique evo 1" yes
+ add_engine cruise "Cinematique evo 2" yes
+ add_engine drascula "Drascula: The Vampire Strikes Back" yes
++add_engine gargoyle "Gargoyle" yes
+ add_engine gob "Gobli*ns" yes
+ add_engine groovie "Groovie" yes "groovie2"
+ add_engine groovie2 "Groovie 2 games" no
+Index: engines/engines.mk
+===================================================================
+--- engines/engines.mk	(revision 44039)
++++ engines/engines.mk	(working copy)
+@@ -41,6 +41,11 @@
+ MODULES += engines/drascula
+ endif
+ 
++ifdef ENABLE_GARGOYLE
++DEFINES += -DENABLE_GARGOYLE=$(ENABLE_GARGOYLE)
++MODULES += engines/gargoyle
++endif
++
+ ifdef ENABLE_GOB
+ DEFINES += -DENABLE_GOB=$(ENABLE_GOB)
+ MODULES += engines/gob
