@@ -38,6 +38,7 @@
 #include "scumm/he/intern_he.h"
 #include "scumm/scumm_v0.h"
 #include "scumm/scumm_v8.h"
+#include "scumm/se/scumm_se.h"
 #include "scumm/file.h"
 #include "scumm/file_nes.h"
 #include "scumm/resource.h"
@@ -1182,7 +1183,7 @@ Common::Error ScummMetaEngine::createInstance(OSystem *syst, Engine **engine) co
 	case 5:
 #ifdef ENABLE_SCUMM_SE
 		if (res.game.features & GF_SPECIAL_EDITION)
-			error("Engine_SCUMM_create(): Special Edition not supported (yet)");
+			*engine = new ScummEngine_se(syst, res);
 		else
 #endif
 			*engine = new ScummEngine_v5(syst, res);
